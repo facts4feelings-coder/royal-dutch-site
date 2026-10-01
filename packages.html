@@ -8,7 +8,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&family=Allura&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="css/style.css?v=2">
+<link rel="stylesheet" href="css/style.css?v=3">
 <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><circle cx='50' cy='50' r='46' fill='%230a1e5e'/><text x='50' y='68' font-size='52' text-anchor='middle' fill='%23e6a817' font-family='Georgia' font-style='italic' font-weight='bold'>R</text></svg>">
 </head>
 <body>
@@ -52,7 +52,7 @@
         <li><a href="gallery.html">Gallery</a></li>
         <li><a href="contact.html">Contact</a></li>
       </ul>
-      <a class="btn btn-gold btn-sm nav-cta" href="booking.html">Book Now</a>
+      <a class="btn btn-gold btn-sm nav-cta open-booking" href="#booking">Book Now</a>
     </div>
   </nav>
 </header>
@@ -89,7 +89,7 @@
           </ul>
           <div class="pkg-foot">
             <div class="pkg-price"><small>Starting from</small><b>Rs 185,000 <i>/ person</i></b></div>
-            <a class="btn btn-gold btn-sm" href="booking.html?package=Umrah%20Economy%20Package">Book Now</a>
+            <a class="btn btn-gold btn-sm open-booking" href="#booking" data-package="Umrah Economy Package">Book Now</a>
           </div>
         </div>
       </div>
@@ -107,7 +107,7 @@
           </ul>
           <div class="pkg-foot">
             <div class="pkg-price"><small>Starting from</small><b>Rs 285,000 <i>/ person</i></b></div>
-            <a class="btn btn-gold btn-sm" href="booking.html?package=Umrah%20Premium%20Package">Book Now</a>
+            <a class="btn btn-gold btn-sm open-booking" href="#booking" data-package="Umrah Premium Package">Book Now</a>
           </div>
         </div>
       </div>
@@ -125,7 +125,7 @@
           </ul>
           <div class="pkg-foot">
             <div class="pkg-price"><small>Starting from</small><b>Rs 145,000 <i>/ person</i></b></div>
-            <a class="btn btn-gold btn-sm" href="booking.html?package=Dubai%20Explorer%20Package">Book Now</a>
+            <a class="btn btn-gold btn-sm open-booking" href="#booking" data-package="Dubai Explorer Package">Book Now</a>
           </div>
         </div>
       </div>
@@ -143,7 +143,7 @@
           </ul>
           <div class="pkg-foot">
             <div class="pkg-price"><small>Starting from</small><b>Rs 485,000 <i>/ person</i></b></div>
-            <a class="btn btn-gold btn-sm" href="booking.html?package=Europe%20Highlights%20Package">Book Now</a>
+            <a class="btn btn-gold btn-sm open-booking" href="#booking" data-package="Europe Highlights Package">Book Now</a>
           </div>
         </div>
       </div>
@@ -161,7 +161,7 @@
           </ul>
           <div class="pkg-foot">
             <div class="pkg-price"><small>Starting from</small><b>Rs 85,000 <i>/ person</i></b></div>
-            <a class="btn btn-gold btn-sm" href="booking.html?package=Hunza%20Skardu%20Package">Book Now</a>
+            <a class="btn btn-gold btn-sm open-booking" href="#booking" data-package="Hunza Skardu Package">Book Now</a>
           </div>
         </div>
       </div>
@@ -179,7 +179,7 @@
           </ul>
           <div class="pkg-foot">
             <div class="pkg-price"><small>Starting from</small><b>Rs 325,000 <i>/ person</i></b></div>
-            <a class="btn btn-gold btn-sm" href="booking.html?package=Turkey%20Magic%20Package">Book Now</a>
+            <a class="btn btn-gold btn-sm open-booking" href="#booking" data-package="Turkey Magic Package">Book Now</a>
           </div>
         </div>
       </div>
@@ -197,7 +197,7 @@
           </ul>
           <div class="pkg-foot">
             <div class="pkg-price"><small>Starting from</small><b>Rs 215,000 <i>/ person</i></b></div>
-            <a class="btn btn-gold btn-sm" href="booking.html?package=Malaysia%20Singapore%20Package">Book Now</a>
+            <a class="btn btn-gold btn-sm open-booking" href="#booking" data-package="Malaysia Singapore Package">Book Now</a>
           </div>
         </div>
       </div>
@@ -215,7 +215,7 @@
           </ul>
           <div class="pkg-foot">
             <div class="pkg-price"><small>Starting from</small><b>Rs 395,000 <i>/ couple</i></b></div>
-            <a class="btn btn-gold btn-sm" href="booking.html?package=Maldives%20Honeymoon%20Package">Book Now</a>
+            <a class="btn btn-gold btn-sm open-booking" href="#booking" data-package="Maldives Honeymoon Package">Book Now</a>
           </div>
         </div>
       </div>
@@ -233,7 +233,7 @@
           </ul>
           <div class="pkg-foot">
             <div class="pkg-price"><small>Quote</small><b>On Request</b></div>
-            <a class="btn btn-gold btn-sm" href="booking.html?package=Customized%20Trip">Book Now</a>
+            <a class="btn btn-gold btn-sm open-booking" href="#booking" data-package="Customized Trip">Book Now</a>
           </div>
         </div>
       </div>
@@ -273,7 +273,7 @@
         <li><a href="destinations.html">Destinations</a></li>
         <li><a href="gallery.html">Gallery</a></li>
         <li><a href="faq.html">FAQs</a></li>
-        <li><a href="booking.html">Book Now</a></li>
+        <li><a href="#booking" class="open-booking">Book Now</a></li>
       </ul>
     </div>
     <div class="foot-col">
@@ -307,5 +307,6 @@
 <button class="to-top" id="toTop" aria-label="Back to top">↑</button>
 
 <script src="js/main.js?v=2"></script>
+<script src="js/booking-modal.js?v=1"></script>
 </body>
 </html>

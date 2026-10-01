@@ -1,23 +1,48 @@
 <?php
 // Royal Horizon Voyages — booking form handler
-// Receives POST from booking.html, emails the agency + auto-replies to the customer.
+// Receives POST from the booking popup modal (js/booking-modal.js).
+// ajax=1 -> JSON response {ok, ref|error}; otherwise redirects back to the
+// referring page with ?booking=success|error (modal shows a toast).
 
 $AGENCY_EMAIL = 'info@royalhorizonvoyages.com';
 $AGENCY_NAME  = 'Royal Horizon Voyages';
 
-function fail() {
-    header('Location: booking.html?status=error');
+$isAjax = (($_POST['ajax'] ?? '') === '1')
+    || (strpos($_SERVER['HTTP_ACCEPT'] ?? '', 'application/json') !== false);
+
+// Redirect target for non-AJAX posts: same-host referer, else site root.
+function back_url($status) {
+    $ref  = $_SERVER['HTTP_REFERER'] ?? '';
+    $path = '/';
+    if ($ref !== '') {
+        $p    = parse_url($ref);
+        $host = $_SERVER['HTTP_HOST'] ?? '';
+        if (($p['host'] ?? '') === $host && !empty($p['path'])) {
+            $path = $p['path'];
+        }
+    }
+    return $path . '?booking=' . $status;
+}
+
+function respond($ok, $ref = '') {
+    global $isAjax;
+    if ($isAjax) {
+        header('Content-Type: application/json; charset=UTF-8');
+        echo json_encode($ok ? ['ok' => true, 'ref' => $ref]
+                             : ['ok' => false, 'error' => $ref]);
+        exit;
+    }
+    header('Location: ' . back_url($ok ? 'success' : 'error'));
     exit;
 }
+
+function fail($msg = 'Please check the form and try again.') { respond(false, $msg); }
 
 // Only accept POST
 if ($_SERVER['REQUEST_METHOD'] !== 'POST') { fail(); }
 
 // Honeypot: bots fill this hidden field — pretend success, send nothing
-if (!empty($_POST['website'])) {
-    header('Location: booking.html?status=success');
-    exit;
-}
+if (!empty($_POST['website'])) { respond(true, ''); }
 
 function clean($v) {
     $v = is_array($v) ? '' : (string)$v;
@@ -47,13 +72,13 @@ if (!empty($_POST['services']) && is_array($_POST['services'])) {
 }
 
 // Validation
-if ($name === '' || $phone === '' || $email === '' || $package === '' || $depart === '' || $ret === '') { fail(); }
-if (!filter_var($email, FILTER_VALIDATE_EMAIL)) { fail(); }
+if ($name === '' || $phone === '' || $email === '' || $package === '' || $depart === '' || $ret === '') { fail('Please fill in all required fields.'); }
+if (!filter_var($email, FILTER_VALIDATE_EMAIL)) { fail('Please enter a valid email address.'); }
 if (!preg_match('/^[+\d][\d\s\-()]{6,20}$/', $phone)) { fail(); }
 $d1 = DateTime::createFromFormat('Y-m-d', $depart);
 $d2 = DateTime::createFromFormat('Y-m-d', $ret);
 $today = new DateTime('today');
-if (!$d1 || !$d2 || $d1 < $today || $d2 < $d1) { fail(); }
+if (!$d1 || !$d2 || $d1 < $today || $d2 < $d1) { fail('Please choose valid departure and return dates.'); }
 
 $total_travelers = $adults + $children + $infants;
 $ref = 'RHV-' . date('Ymd') . '-' . strtoupper(substr(md5($email . microtime(true)), 0, 6));
@@ -117,5 +142,4 @@ if ($sent) {
     @mail($email, '=?UTF-8?B?' . base64_encode($cust_subject) . '?=', $cust_body, $cheaders, "-f$AGENCY_EMAIL");
 }
 
-header('Location: booking.html?status=' . ($sent ? 'success' : 'error'));
-exit;
+respond($sent, $sent ? $ref : 'The message could not be sent. Please try again or WhatsApp us at 0300 9877300.');

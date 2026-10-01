@@ -607,3 +607,40 @@ footer::before{content:"";position:absolute;top:0;left:0;right:0;height:5px;back
   .b-sec-head h3{font-size:19px}
   .b-num{width:42px;height:42px;font-size:18px}
 }
+
+/* ============================================================
+   BOOKING POPUP MODAL
+   ============================================================ */
+.bk-lock{overflow:hidden}
+.bk-overlay{position:fixed;inset:0;z-index:9999;background:rgba(6,15,56,.72);backdrop-filter:blur(4px);display:flex;align-items:flex-start;justify-content:center;padding:4vh 16px;opacity:0;visibility:hidden;transition:opacity .3s,visibility .3s;overflow-y:auto}
+.bk-overlay.open{opacity:1;visibility:visible}
+.bk-dialog{background:#fff;border-radius:24px;width:100%;max-width:880px;box-shadow:0 30px 80px rgba(0,0,0,.4);transform:translateY(26px) scale(.98);transition:transform .32s cubic-bezier(.2,.9,.3,1.2);overflow:hidden}
+.bk-overlay.open .bk-dialog{transform:none}
+.bk-head{background:linear-gradient(120deg,var(--navy-dark),var(--navy-2));color:#fff;padding:26px 30px;display:flex;align-items:center;justify-content:space-between;gap:16px;position:relative;overflow:hidden}
+.bk-head::after{content:"";position:absolute;right:-60px;top:-60px;width:200px;height:200px;border-radius:50%;background:radial-gradient(circle,rgba(230,168,23,.3),transparent 70%)}
+.bk-head h3{margin:0;font-size:24px;font-weight:800;color:#fff;position:relative;z-index:1}
+.bk-head p{margin:4px 0 0;font-size:13.5px;color:#c9d2ee;position:relative;z-index:1}
+.bk-close{flex:none;width:42px;height:42px;border-radius:50%;border:1.5px solid rgba(255,255,255,.35);background:rgba(255,255,255,.08);color:#fff;font-size:24px;line-height:1;cursor:pointer;transition:.25s;position:relative;z-index:1;display:grid;place-items:center}
+.bk-close:hover{background:var(--gold);border-color:var(--gold);color:var(--navy-dark);transform:rotate(90deg)}
+.bk-body{padding:30px;max-height:calc(92vh - 120px);overflow-y:auto}
+.bk-submit{width:100%;font-size:17px;padding:16px;margin-top:6px}
+.bk-submit:disabled{opacity:.65;cursor:wait;transform:none}
+.bk-err{display:none;background:#fdecec;border:1.5px solid #f5b5b5;color:#b4232a;border-radius:12px;padding:12px 16px;font-size:14px;margin-bottom:16px}
+.bk-success{text-align:center;padding:40px 20px}
+.bk-tick{width:84px;height:84px;margin:0 auto 22px;border-radius:50%;background:linear-gradient(135deg,var(--gold-2),var(--gold));color:var(--navy-dark);font-size:42px;font-weight:800;display:grid;place-items:center;box-shadow:0 12px 30px rgba(230,168,23,.4);animation:bkPop .45s cubic-bezier(.2,.9,.3,1.4)}
+@keyframes bkPop{from{transform:scale(.4);opacity:0}to{transform:scale(1);opacity:1}}
+.bk-success h3{color:var(--navy);font-size:26px;margin-bottom:12px}
+.bk-success p{color:var(--ink);font-size:15.5px;margin-bottom:10px}
+.bk-success .btn{margin-top:14px;min-width:180px}
+.bk-toast{position:fixed;left:50%;bottom:26px;transform:translateX(-50%) translateY(20px);z-index:10000;background:var(--navy-dark);color:#fff;padding:14px 24px;border-radius:14px;font-size:14.5px;box-shadow:0 14px 34px rgba(0,0,0,.35);opacity:0;visibility:hidden;transition:.3s;max-width:calc(100vw - 40px);text-align:center}
+.bk-toast.show{opacity:1;visibility:visible;transform:translateX(-50%)}
+.bk-toast.ok{border-left:5px solid #34c77b}
+.bk-toast.err{border-left:5px solid #e5484d}
+.check.flexline{display:inline-flex;margin-top:2px}
+@media(max-width:680px){
+  .bk-overlay{padding:0;align-items:flex-end}
+  .bk-dialog{border-radius:22px 22px 0 0;max-width:100%}
+  .bk-head{padding:20px}
+  .bk-head h3{font-size:20px}
+  .bk-body{padding:20px 18px;max-height:calc(94vh - 100px)}
+}
