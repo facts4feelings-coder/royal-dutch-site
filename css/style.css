@@ -529,3 +529,27 @@ footer::before{content:"";position:absolute;top:0;left:0;right:0;height:5px;back
 .trust-ico svg{width:26px;height:26px;fill:#0a1e5e}
 @media(max-width:900px){.trust-grid{grid-template-columns:repeat(3,1fr)}}
 @media(max-width:560px){.trust-grid{grid-template-columns:repeat(2,1fr);gap:22px}.topbar{letter-spacing:1.5px;font-size:10px}}
+
+/* ============ Flyer-style service cards (4) — 2026-10-01 ============ */
+.sec-flyer{background:#f4f7fc}
+.fcards-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:26px}
+.fcard{--fc:#1e5aa8;background:#fff;border:2px solid var(--fc);border-radius:18px;overflow:hidden;box-shadow:0 10px 28px rgba(10,30,94,.10);transition:transform .3s ease,box-shadow .3s ease;display:flex;flex-direction:column}
+.fcard:hover{transform:translateY(-7px);box-shadow:0 18px 40px rgba(10,30,94,.18)}
+.fcard-blue{--fc:#1e5aa8}
+.fcard-green{--fc:#2e9e5b}
+.fcard-purple{--fc:#7b4baf}
+.fcard-gold{--fc:#c98f0e}
+.fcard-photo{height:165px;overflow:hidden}
+.fcard-photo img{width:100%;height:100%;object-fit:cover;display:block;transition:transform .5s ease}
+.fcard:hover .fcard-photo img{transform:scale(1.06)}
+.fcard-icon{width:66px;height:66px;border-radius:50%;background:var(--fc);border:4px solid #fff;box-shadow:0 4px 12px rgba(0,0,0,.18);display:flex;align-items:center;justify-content:center;margin:-33px auto 0;position:relative;z-index:2}
+.fcard-icon svg{width:30px;height:30px;fill:#fff}
+.fcard-body{padding:18px 20px 24px;text-align:center;flex:1}
+.fcard-body h3{color:var(--fc);font-size:17px;letter-spacing:1.5px;margin:0 0 4px;font-weight:800}
+.fcard-tag{color:#6b7280;font-size:13.5px;font-style:italic;margin:0 0 16px}
+.fcard-list{list-style:none;margin:0;padding:0;text-align:left;display:flex;flex-direction:column;gap:11px}
+.fcard-list li{display:flex;align-items:flex-start;gap:10px;font-size:13.8px;color:#374151;line-height:1.45}
+.fcard-list .ck{flex-shrink:0;width:22px;height:22px;border-radius:50%;background:var(--fc);display:inline-flex;align-items:center;justify-content:center;margin-top:1px}
+.fcard-list .ck svg{width:13px;height:13px;fill:#fff}
+@media(max-width:1024px){.fcards-grid{grid-template-columns:repeat(2,1fr)}}
+@media(max-width:600px){.fcards-grid{grid-template-columns:1fr;max-width:420px;margin:0 auto}}
