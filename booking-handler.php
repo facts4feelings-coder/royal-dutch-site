@@ -64,7 +64,6 @@ $children = max(0, min(10, (int)($_POST['children'] ?? 0)));
 $infants  = max(0, min(10, (int)($_POST['infants'] ?? 0)));
 $hotel    = clean($_POST['hotel'] ?? 'Any');
 $room     = clean($_POST['room'] ?? '');
-$budget   = clean($_POST['budget'] ?? '');
 $requests = clean($_POST['requests'] ?? '');
 $services = [];
 if (!empty($_POST['services']) && is_array($_POST['services'])) {
@@ -72,13 +71,19 @@ if (!empty($_POST['services']) && is_array($_POST['services'])) {
 }
 
 // Validation
-if ($name === '' || $phone === '' || $email === '' || $package === '' || $depart === '' || $ret === '') { fail('Please fill in all required fields.'); }
+if ($name === '' || $phone === '' || $email === '' || $package === '') { fail('Please fill in all required fields.'); }
 if (!filter_var($email, FILTER_VALIDATE_EMAIL)) { fail('Please enter a valid email address.'); }
 if (!preg_match('/^[+\d][\d\s\-()]{6,20}$/', $phone)) { fail(); }
-$d1 = DateTime::createFromFormat('Y-m-d', $depart);
-$d2 = DateTime::createFromFormat('Y-m-d', $ret);
-$today = new DateTime('today');
-if (!$d1 || !$d2 || $d1 < $today || $d2 < $d1) { fail('Please choose valid departure and return dates.'); }
+$d1 = $d2 = null;
+if ($flexible === 'Yes') {
+    $depart = $ret = '';
+} else {
+    if ($depart === '' || $ret === '') { fail('Please choose your travel dates.'); }
+    $d1 = DateTime::createFromFormat('Y-m-d', $depart);
+    $d2 = DateTime::createFromFormat('Y-m-d', $ret);
+    $today = new DateTime('today');
+    if (!$d1 || !$d2 || $d1 < $today || $d2 < $d1) { fail('Please choose valid departure and return dates.'); }
+}
 
 $total_travelers = $adults + $children + $infants;
 $ref = 'RHV-' . date('Ymd') . '-' . strtoupper(substr(md5($email . microtime(true)), 0, 6));
@@ -87,13 +92,12 @@ $ip = $_SERVER['REMOTE_ADDR'] ?? 'unknown';
 $rows = [
     'Booking Ref'   => esc($ref),
     'Package'       => esc($package),
-    'Departure'     => $d1->format('d M Y'),
-    'Return'        => $d2->format('d M Y'),
+    'Departure'     => $d1 ? $d1->format('d M Y') : 'Flexible',
+    'Return'        => $d2 ? $d2->format('d M Y') : 'Flexible',
     'Flexible Dates'=> $flexible,
     'Travelers'     => "$total_travelers (Adults: $adults, Children: $children, Infants: $infants)",
     'Hotel'         => esc($hotel),
     'Room Type'     => esc($room),
-    'Budget'        => esc($budget),
     'Extra Services'=> $services ? esc(implode(', ', $services)) : '—',
     'Name'          => esc($name),
     'Phone'         => esc($phone),
@@ -132,7 +136,7 @@ if ($sent) {
         . '<p>Thank you for choosing <b>Royal Horizon Voyages</b>. We have received your booking request:</p>'
         . '<ul><li><b>Reference:</b> ' . esc($ref) . '</li>'
         . '<li><b>Package:</b> ' . esc($package) . '</li>'
-        . '<li><b>Dates:</b> ' . $d1->format('d M Y') . ' → ' . $d2->format('d M Y') . '</li>'
+        . '<li><b>Dates:</b> ' . ($d1 ? $d1->format('d M Y') . ' → ' . $d2->format('d M Y') : 'Flexible') . '</li>'
         . '<li><b>Travelers:</b> ' . $total_travelers . '</li></ul>'
         . '<p>Our team will contact you within <b>24 hours</b> with your quote.</p>'
         . '<p>For urgent queries: <b>0300 9877300</b> or <a href="https://wa.me/923009877300">WhatsApp</a>.</p>'

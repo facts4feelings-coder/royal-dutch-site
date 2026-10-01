@@ -59,7 +59,7 @@
             '<div class="form-group"><label for="bkReturn">Return Date *</label>' +
               '<input type="date" id="bkReturn" name="return_date" required></div>' +
           '</div>' +
-          '<label class="check flexline"><input type="checkbox" name="flexible" value="yes"><span class="box"><svg viewBox="0 0 24 24"><path d="M9 16.2l-3.5-3.5L4 14.2 9 19.2 20 8.2l-1.5-1.5z"/></svg></span> My dates are flexible</label>' +
+          '<label class="check flexline"><input type="checkbox" name="flexible" value="yes" id="bkFlex"><span class="box"><svg viewBox="0 0 24 24"><path d="M9 16.2l-3.5-3.5L4 14.2 9 19.2 20 8.2l-1.5-1.5z"/></svg></span> My dates are flexible</label>' +
         '</div>' +
         '<div class="b-section">' +
           '<div class="b-sec-head"><span class="b-num">2</span><div><h3>Your Preferences</h3><p>Help us tailor the perfect trip for you.</p></div></div>' +
@@ -73,16 +73,12 @@
             '<div class="form-group"><label for="bkRoom">Room Type</label>' +
               '<select id="bkRoom" name="room"><option>Any</option><option>Single</option><option>Double</option><option>Triple</option><option>Quad</option><option>Family Suite</option></select></div>' +
           '</div>' +
-          '<div class="form-row">' +
-            '<div class="form-group"><label for="bkBudget">Budget Range (per person)</label>' +
-              '<select id="bkBudget" name="budget"><option>Not sure yet</option><option>Under Rs 100,000</option><option>Rs 100,000 – 200,000</option><option>Rs 200,000 – 350,000</option><option>Rs 350,000 – 500,000</option><option>Above Rs 500,000</option></select></div>' +
-            '<div class="form-group"><label>Services Needed</label><div class="checks">' +
+          '<div class="form-group"><label>Services Needed</label><div class="checks cols4">' +
               '<label class="check"><input type="checkbox" name="services[]" value="Visa Assistance"><span class="box"><svg viewBox="0 0 24 24"><path d="M9 16.2l-3.5-3.5L4 14.2 9 19.2 20 8.2l-1.5-1.5z"/></svg></span>Visa Assistance</label>' +
               '<label class="check"><input type="checkbox" name="services[]" value="Flights"><span class="box"><svg viewBox="0 0 24 24"><path d="M9 16.2l-3.5-3.5L4 14.2 9 19.2 20 8.2l-1.5-1.5z"/></svg></span>Flights</label>' +
               '<label class="check"><input type="checkbox" name="services[]" value="Airport Transfers"><span class="box"><svg viewBox="0 0 24 24"><path d="M9 16.2l-3.5-3.5L4 14.2 9 19.2 20 8.2l-1.5-1.5z"/></svg></span>Airport Transfers</label>' +
               '<label class="check"><input type="checkbox" name="services[]" value="Travel Insurance"><span class="box"><svg viewBox="0 0 24 24"><path d="M9 16.2l-3.5-3.5L4 14.2 9 19.2 20 8.2l-1.5-1.5z"/></svg></span>Travel Insurance</label>' +
             '</div></div>' +
-          '</div>' +
         '</div>' +
         '<div class="b-section">' +
           '<div class="b-sec-head"><span class="b-num">3</span><div><h3>Your Details</h3><p>Where should we reach you?</p></div></div>' +
@@ -163,6 +159,25 @@
       if (ret.value && ret.value < ret.min) ret.value = ret.min;
     });
 
+    // clicking anywhere on the date field opens the calendar picker
+    [depart, ret].forEach(function (inp) {
+      inp.addEventListener('click', function () {
+        try { inp.showPicker(); } catch (e) {}
+      });
+    });
+
+    // "My dates are flexible": disable the date fields so no dates are needed
+    var flexCb = document.getElementById('bkFlex');
+    function syncFlex() {
+      var dis = flexCb.checked;
+      depart.disabled = dis; ret.disabled = dis;
+      depart.required = !dis; ret.required = !dis;
+      if (dis) { depart.value = ''; ret.value = ''; ret.min = today; }
+      depart.closest('.form-group').classList.toggle('dimmed', dis);
+      ret.closest('.form-group').classList.toggle('dimmed', dis);
+    }
+    flexCb.addEventListener('change', syncFlex);
+
     // steppers
     var counts = { adults: 2, children: 0, infants: 0 };
     var max = { adults: 20, children: 10, infants: 5 };
@@ -186,9 +201,12 @@
       e.preventDefault();
       errBox.style.display = 'none';
       if (!pkgSel.value) return showErr('Please select a package / destination.');
-      if (!depart.value) return showErr('Please choose a departure date.');
-      if (!ret.value) return showErr('Please choose a return date.');
-      if (ret.value < depart.value) return showErr('Return date cannot be before departure date.');
+      var flex = flexCb.checked;
+      if (!flex) {
+        if (!depart.value) return showErr('Please choose a departure date (or tick "My dates are flexible").');
+        if (!ret.value) return showErr('Please choose a return date (or tick "My dates are flexible").');
+        if (ret.value < depart.value) return showErr('Return date cannot be before departure date.');
+      }
       var name = document.getElementById('bkName');
       var phone = document.getElementById('bkPhone');
       var email = document.getElementById('bkEmail');
