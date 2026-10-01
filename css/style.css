@@ -553,3 +553,57 @@ footer::before{content:"";position:absolute;top:0;left:0;right:0;height:5px;back
 .fcard-list .ck svg{width:13px;height:13px;fill:#fff}
 @media(max-width:1024px){.fcards-grid{grid-template-columns:repeat(2,1fr)}}
 @media(max-width:600px){.fcards-grid{grid-template-columns:1fr;max-width:420px;margin:0 auto}}
+
+/* ============================================================
+   BOOKING PAGE
+   ============================================================ */
+.booking-wrap{max-width:880px;margin:0 auto}
+.b-status{border-radius:14px;padding:16px 20px;margin-bottom:24px;font-size:14.5px;line-height:1.6}
+.b-status.ok{background:#e9f9ef;border:1.5px solid #34b36b;color:#14532d}
+.b-status.err{background:#fdecec;border:1.5px solid #e05252;color:#7a1f1f}
+.b-section{background:#fff;border-radius:22px;padding:36px 34px;box-shadow:var(--shadow-md);border-top:5px solid var(--gold);margin-bottom:28px}
+.b-sec-head{display:flex;gap:16px;align-items:center;margin-bottom:24px}
+.b-num{width:48px;height:48px;flex:none;border-radius:50%;background:linear-gradient(135deg,var(--gold-2),var(--gold));color:var(--navy-dark);font-weight:800;font-size:20px;display:flex;align-items:center;justify-content:center;box-shadow:0 8px 20px rgba(230,168,23,.35)}
+.b-sec-head h3{font-size:22px;color:var(--navy);margin:0}
+.b-sec-head p{font-size:13.5px;color:var(--muted);margin:2px 0 0}
+.hp-field{position:absolute;left:-9999px;top:auto;width:1px;height:1px;opacity:0}
+
+/* traveler steppers */
+.steppers{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}
+.stepper{border:1.5px solid var(--line);border-radius:14px;padding:12px 8px;text-align:center;background:#fbfcff}
+.stepper>span{display:block;font-size:13px;font-weight:600;color:var(--navy)}
+.stepper>span small{display:block;font-weight:400;color:var(--muted);font-size:11px}
+.st-ctrl{display:flex;align-items:center;justify-content:center;gap:8px;margin-top:8px}
+.st-ctrl button{width:34px;height:34px;border-radius:50%;border:1.5px solid var(--gold);background:#fff;color:var(--navy);font-size:19px;font-weight:700;cursor:pointer;line-height:1;display:flex;align-items:center;justify-content:center;transition:.2s}
+.st-ctrl button:hover{background:var(--gold);color:var(--navy-dark)}
+.st-ctrl input{width:38px;text-align:center;border:none;background:transparent;font-family:inherit;font-size:17px;font-weight:700;color:var(--navy);pointer-events:none}
+
+/* radio pills */
+.pills{display:flex;flex-wrap:wrap;gap:10px}
+.pill input{position:absolute;opacity:0;pointer-events:none}
+.pill span{display:inline-block;padding:11px 22px;border:1.5px solid var(--line);border-radius:999px;font-size:14px;font-weight:600;color:var(--ink);background:#fbfcff;cursor:pointer;transition:.2s}
+.pill span:hover{border-color:var(--gold)}
+.pill input:checked+span{background:linear-gradient(135deg,var(--gold-2),var(--gold));border-color:var(--gold);color:var(--navy-dark);box-shadow:0 6px 16px rgba(230,168,23,.35)}
+.pill input:focus-visible+span{outline:2px solid var(--gold);outline-offset:2px}
+
+/* custom checkboxes */
+.checks{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.check{display:flex;align-items:center;gap:10px;font-size:14px;color:var(--ink);cursor:pointer;border:1.5px solid var(--line);border-radius:12px;padding:11px 14px;background:#fbfcff;transition:.2s;margin-bottom:0}
+.check:hover{border-color:var(--gold)}
+.check input{position:absolute;opacity:0;pointer-events:none}
+.check .box{width:22px;height:22px;flex:none;border-radius:7px;border:1.5px solid var(--line);background:#fff;display:flex;align-items:center;justify-content:center;transition:.2s}
+.check .box svg{width:14px;height:14px;fill:#fff;opacity:0;transform:scale(.5);transition:.2s}
+.check input:checked~.box{background:linear-gradient(135deg,var(--gold-2),var(--gold));border-color:var(--gold)}
+.check input:checked~.box svg{opacity:1;transform:scale(1)}
+.b-note{text-align:center;font-size:13.5px;color:var(--muted);margin:16px 0 0}
+.b-note a{color:var(--navy);font-weight:600;text-decoration:underline}
+#bSubmit:disabled{opacity:.65;cursor:wait;transform:none}
+
+/* responsive */
+@media(max-width:680px){
+  .b-section{padding:26px 20px}
+  .steppers{grid-template-columns:1fr}
+  .checks{grid-template-columns:1fr}
+  .b-sec-head h3{font-size:19px}
+  .b-num{width:42px;height:42px;font-size:18px}
+}
