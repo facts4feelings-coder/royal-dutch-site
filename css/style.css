@@ -1,5 +1,5 @@
 /* ============================================================
-   ROYAL HORIZON TRAVEL — Design System
+   ROYAL HORIZON VOYAGES — Design System
    Brand: Navy #0a1e5e / Gold #e6a817
    ============================================================ */
 :root{
@@ -519,3 +519,13 @@ footer::before{content:"";position:absolute;top:0;left:0;right:0;height:5px;back
   .wa-float{width:52px;height:52px;bottom:16px;right:16px}
   .wa-float svg{width:28px;height:28px}
 }
+
+/* ============ Slogan topbar + trust strip (flyer update 2026-10-01) ============ */
+.topbar{background:#0a1e5e;color:#e6a817;text-align:center;font-size:11px;letter-spacing:3px;padding:7px 10px;font-weight:600;text-transform:uppercase}
+.trust-strip{background:#0a1e5e;padding:34px 0}
+.trust-grid{display:grid;grid-template-columns:repeat(6,1fr);gap:18px;align-items:start}
+.trust-item{display:flex;flex-direction:column;align-items:center;gap:10px;text-align:center;color:#fff;font-size:13px;font-weight:600}
+.trust-ico{width:52px;height:52px;border-radius:50%;background:#e6a817;display:flex;align-items:center;justify-content:center;flex-shrink:0}
+.trust-ico svg{width:26px;height:26px;fill:#0a1e5e}
+@media(max-width:900px){.trust-grid{grid-template-columns:repeat(3,1fr)}}
+@media(max-width:560px){.trust-grid{grid-template-columns:repeat(2,1fr);gap:22px}.topbar{letter-spacing:1.5px;font-size:10px}}

@@ -1,5 +1,5 @@
 /* ============================================================
-   ROYAL HORIZON TRAVEL — Interactions
+   ROYAL HORIZON VOYAGES — Interactions
    ============================================================ */
 (function(){
   "use strict";
