@@ -43,10 +43,17 @@
     links.prepend(closeBtn);
     function syncClose(){ closeBtn.style.display = window.innerWidth <= 1020 ? "" : "none"; }
     syncClose(); window.addEventListener("resize", syncClose);
-    toggle.addEventListener("click", function(){ links.classList.add("open"); document.body.style.overflow="hidden"; });
+    // dim overlay behind the drawer (created once, shared by all pages)
+    var scrim = document.createElement("div");
+    scrim.className = "nav-scrim";
+    document.body.appendChild(scrim);
+    function openMenu(){ links.classList.add("open"); scrim.classList.add("show"); document.body.style.overflow="hidden"; }
+    function closeMenu(){ links.classList.remove("open"); scrim.classList.remove("show"); document.body.style.overflow=""; }
+    toggle.addEventListener("click", function(){ links.classList.contains("open") ? closeMenu() : openMenu(); });
     closeBtn.addEventListener("click", closeMenu);
+    scrim.addEventListener("click", closeMenu);
+    document.addEventListener("keydown", function(e){ if(e.key === "Escape") closeMenu(); });
     links.querySelectorAll("a").forEach(function(a){ a.addEventListener("click", closeMenu); });
-    function closeMenu(){ links.classList.remove("open"); document.body.style.overflow=""; }
   }
 
   /* ---------- Active nav link ---------- */
