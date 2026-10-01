@@ -1,0 +1,14 @@
+# Royal Horizon Voyages — cache policy
+# HTML pages must always revalidate so new deploys (like the booking popup)
+# show up immediately instead of serving a stale cached copy.
+<IfModule mod_headers.c>
+  <FilesMatch "\.html$">
+    Header set Cache-Control "no-cache, must-revalidate"
+  </FilesMatch>
+</IfModule>
+<IfModule mod_expires.c>
+  ExpiresActive On
+  ExpiresByType text/html "access plus 0 seconds"
+  ExpiresByType text/css "access plus 7 days"
+  ExpiresByType application/javascript "access plus 7 days"
+</IfModule>
