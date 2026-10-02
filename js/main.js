@@ -3,7 +3,7 @@
    ============================================================ */
 (function(){
   "use strict";
-  var WA_NUMBER = "923009877300";
+  var WA_NUMBER = "923349873000";
 
   /* ---------- Preloader ---------- */
   window.addEventListener("load", function(){

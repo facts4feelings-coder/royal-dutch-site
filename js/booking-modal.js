@@ -97,7 +97,7 @@
         '<input type="hidden" name="ajax" value="1">' +
         '<div class="bk-err" id="bkErr" role="alert"></div>' +
         '<button type="submit" class="btn btn-gold bk-submit" id="bkSubmit">Send Booking Request</button>' +
-        '<p class="b-note">Prefer WhatsApp? <a href="https://wa.me/923009877300" target="_blank" rel="noopener">Chat with us directly</a></p>' +
+        '<p class="b-note">Prefer WhatsApp? <a href="https://wa.me/923349873000" target="_blank" rel="noopener">Chat with us directly</a></p>' +
       '</form>' +
       '</div>' +
     '</div>' +

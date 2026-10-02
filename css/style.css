@@ -401,11 +401,7 @@ section{position:relative}
 .c-row b{display:block;font-size:15.5px;margin-bottom:2px}
 .c-row a,.c-row span.v{color:#c9d2ee;font-size:14.3px}
 .c-row a:hover{color:var(--gold-2)}
-.c-socials{display:flex;gap:12px;margin-top:8px;position:relative}
-.c-socials a{width:44px;height:44px;border-radius:50%;background:rgba(255,255,255,.1);display:grid;place-items:center;transition:.3s}
-.c-socials a:hover{background:var(--gold);transform:translateY(-4px)}
-.c-socials a:hover svg{fill:var(--navy-dark)}
-.c-socials svg{width:19px;height:19px;fill:#fff}
+/* (removed: c-socials — social icons dropped 2026-10-02) */
 .form-card{background:#fff;border:1px solid var(--line);border-radius:24px;padding:44px 40px;box-shadow:var(--shadow-md)}
 .form-card h3{color:var(--navy);font-size:24px;margin-bottom:6px}
 .form-card>p{color:var(--muted);font-size:14.5px;margin-bottom:28px}
@@ -452,6 +448,18 @@ footer::before{content:"";position:absolute;top:0;left:0;right:0;height:5px;back
 .foot-col a:hover{color:var(--gold-2);padding-left:5px}
 .foot-contact li{display:flex;gap:12px;font-size:14px;align-items:flex-start}
 .foot-contact svg{width:17px;height:17px;fill:var(--gold);flex:none;margin-top:4px}
+/* Email lists (contact page + footer) */
+.c-emails{display:flex;flex-direction:column;gap:9px;margin:0}
+.c-emails span{display:flex;gap:10px;align-items:baseline}
+.c-emails b{color:var(--navy);font-size:12px;letter-spacing:.8px;text-transform:uppercase;min-width:54px}
+.c-emails a{color:#b97f0a;font-weight:700;text-decoration:none;word-break:break-all;font-size:14.5px}
+.c-emails a:hover{text-decoration:underline}
+.c-emails em{color:#6b7280;font-size:13px;font-style:normal;margin-top:2px}
+.foot-emails{display:flex;flex-direction:column;gap:7px}
+.foot-emails a{font-size:13.5px;color:#dfe5f7;text-decoration:none;word-break:break-all}
+.foot-emails a::before{display:none}
+.foot-emails a:hover{color:var(--gold-2)}
+.foot-emails b{color:var(--gold);font-weight:700;margin-right:7px;font-size:12px;letter-spacing:.5px}
 .foot-bottom{border-top:1px solid rgba(255,255,255,.1);padding:22px 0;display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap;font-size:13.5px}
 .foot-bottom b{color:var(--gold-2)}
 

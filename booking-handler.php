@@ -139,11 +139,11 @@ if ($sent) {
         . '<li><b>Dates:</b> ' . ($d1 ? $d1->format('d M Y') . ' → ' . $d2->format('d M Y') : 'Flexible') . '</li>'
         . '<li><b>Travelers:</b> ' . $total_travelers . '</li></ul>'
         . '<p>Our team will contact you within <b>24 hours</b> with your quote.</p>'
-        . '<p>For urgent queries: <b>0300 9877300</b> or <a href="https://wa.me/923009877300">WhatsApp</a>.</p>'
+        . '<p>For urgent queries: <b>0334 9873000</b> or <a href="https://wa.me/923349873000">WhatsApp</a>.</p>'
         . '<p style="color:#888;font-size:12px;">Royal Horizon Voyages — Your Journey, Our Priority.</p></div>';
     $cheaders  = "MIME-Version: 1.0\r\nContent-Type: text/html; charset=UTF-8\r\n";
     $cheaders .= "From: $AGENCY_NAME <$AGENCY_EMAIL>\r\n";
     @mail($email, '=?UTF-8?B?' . base64_encode($cust_subject) . '?=', $cust_body, $cheaders, "-f$AGENCY_EMAIL");
 }
 
-respond($sent, $sent ? $ref : 'The message could not be sent. Please try again or WhatsApp us at 0300 9877300.');
+respond($sent, $sent ? $ref : 'The message could not be sent. Please try again or WhatsApp us at 0334 9873000.');
