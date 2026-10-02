@@ -648,6 +648,7 @@ footer::before{content:"";position:absolute;top:0;left:0;right:0;height:5px;back
 
 /* ===== CEO MESSAGE ===== */
 .sec-ceo{background:linear-gradient(180deg,#fff 0%,#f7f9ff 100%)}
+.sec-ceo .sec-title .script{display:block}
 .ceo-grid{display:grid;grid-template-columns:1.12fr .88fr;gap:60px;align-items:center}
 .ceo-quote{position:relative;margin:24px 0 6px;padding-left:28px;border-left:3px solid var(--gold)}
 .ceo-quote p{color:#3c4560;line-height:1.85;margin-bottom:15px;font-size:16.5px}
