@@ -7,6 +7,8 @@
   if (window.__bkModalInit) return;
   window.__bkModalInit = true;
 
+  var WA_NUMBER = '923349873000';
+
   var PACKAGES = [
     'Umrah Economy Package',
     'Umrah Premium Package',
@@ -97,7 +99,7 @@
         '<input type="hidden" name="ajax" value="1">' +
         '<div class="bk-err" id="bkErr" role="alert"></div>' +
         '<button type="submit" class="btn btn-gold bk-submit" id="bkSubmit">Send Booking Request</button>' +
-        '<p class="b-note">Prefer WhatsApp? <a href="https://wa.me/923349873000" target="_blank" rel="noopener">Chat with us directly</a></p>' +
+        '<p class="b-note">Prefer WhatsApp? <a href="https://wa.me/' + WA_NUMBER + '" target="_blank" rel="noopener">Chat with us directly</a></p>' +
       '</form>' +
       '</div>' +
     '</div>' +
@@ -197,6 +199,49 @@
       errBox.scrollIntoView({ behavior: 'smooth', block: 'center' });
     }
 
+    var MONTHS = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
+    function fmtDate(iso) {
+      if (!iso) return '';
+      var p = iso.split('-');
+      if (p.length !== 3) return iso;
+      return (+p[2]) + ' ' + (MONTHS[+p[1] - 1] || '') + ' ' + p[0];
+    }
+    function waUrl(msg) { return 'https://wa.me/' + WA_NUMBER + '?text=' + encodeURIComponent(msg); }
+    function buildWaMessage(ref) {
+      var lines = [];
+      lines.push('*NEW BOOKING REQUEST* \u2014 Royal Horizon Voyages');
+      if (ref) lines.push('Ref: ' + ref);
+      lines.push('');
+      lines.push('*TRIP DETAILS*');
+      lines.push('Package: ' + pkgSel.value);
+      var trav = [];
+      var ad = +document.getElementById('bkAdults').value || 0;
+      var ch = +document.getElementById('bkChildren').value || 0;
+      var inf = +document.getElementById('bkInfants').value || 0;
+      if (ad) trav.push(ad + (ad === 1 ? ' Adult' : ' Adults'));
+      if (ch) trav.push(ch + (ch === 1 ? ' Child' : ' Children'));
+      if (inf) trav.push(inf + (inf === 1 ? ' Infant' : ' Infants'));
+      lines.push('Travelers: ' + (trav.join(', ') || '\u2014'));
+      if (flexCb.checked) { lines.push('Dates: Flexible'); }
+      else { lines.push('Departure: ' + fmtDate(depart.value)); lines.push('Return: ' + fmtDate(ret.value)); }
+      lines.push('');
+      lines.push('*PREFERENCES*');
+      var hotelEl = form.querySelector('input[name="hotel"]:checked');
+      lines.push('Hotel: ' + (hotelEl ? hotelEl.value : 'Any') + '  |  Room: ' + document.getElementById('bkRoom').value);
+      var svcs = [];
+      form.querySelectorAll('input[name="services[]"]:checked').forEach(function (c) { svcs.push(c.value); });
+      if (svcs.length) lines.push('Services: ' + svcs.join(', '));
+      lines.push('');
+      lines.push('*CONTACT*');
+      lines.push('Name: ' + document.getElementById('bkName').value.trim());
+      lines.push('Phone: ' + document.getElementById('bkPhone').value.trim());
+      lines.push('Email: ' + document.getElementById('bkEmail').value.trim());
+      lines.push('City: ' + document.getElementById('bkCity').value.trim());
+      var notes = document.getElementById('bkNotes').value.trim();
+      if (notes) lines.push('Note: ' + notes);
+      return lines.join('\n');
+    }
+
     form.addEventListener('submit', function (e) {
       e.preventDefault();
       errBox.style.display = 'none';
@@ -218,23 +263,37 @@
 
       submitBtn.disabled = true;
       submitBtn.textContent = 'Sending…';
+      // Open the WhatsApp tab inside the user gesture (popup-blocker safe);
+      // it gets navigated to the real message once the booking is accepted.
+      var waWin = null;
+      try { waWin = window.open('', '_blank'); } catch (e) { waWin = null; }
+      function sendWa(ref) {
+        var url = waUrl(buildWaMessage(ref));
+        if (waWin && !waWin.closed) { try { waWin.location.href = url; return; } catch (e) {} }
+        window.open(url, '_blank');
+      }
       fetch(form.action, { method: 'POST', body: new FormData(form), headers: { 'Accept': 'application/json' } })
         .then(function (r) { return r.json(); })
         .then(function (d) {
           if (d && d.ok) {
+            sendWa(d.ref);
             document.getElementById('bkBody').innerHTML =
               '<div class="bk-success"><div class="bk-tick">✓</div>' +
               '<h3>Request Received!</h3>' +
-              '<p>Thank you, <b>' + escapeHtml(name.value.trim()) + '</b>. Your booking request <b>' + escapeHtml(d.ref) + '</b> has been sent.</p>' +
+              '<p>Thank you, <b>' + escapeHtml(name.value.trim()) + '</b>. Your booking request <b>' + escapeHtml(d.ref) + '</b> has been emailed to us.</p>' +
+              '<p>WhatsApp has been opened with your booking details — just press send there as well.</p>' +
               '<p>Our team will contact you within 24 hours to confirm your trip.</p>' +
               '<button type="button" class="btn btn-gold" id="bkDone">Done</button></div>';
             document.getElementById('bkDone').addEventListener('click', closeModal);
           } else {
+            if (waWin && !waWin.closed) { try { waWin.close(); } catch (e) {} }
             showErr((d && d.error) || 'Something went wrong. Please try again or WhatsApp us.');
           }
         })
         .catch(function () {
-          // fetch failed (e.g. offline) — fall back to normal POST; handler redirects back with ?booking=
+          // fetch failed (e.g. offline) — still push the booking over WhatsApp,
+          // then fall back to normal POST; handler redirects back with ?booking=
+          sendWa('');
           var f = form.cloneNode(true);
           f.querySelector('input[name="ajax"]').value = '0';
           f.style.display = 'none';
