@@ -545,7 +545,7 @@ footer::before{content:"";position:absolute;top:0;left:0;right:0;height:5px;back
 .fcard-tag{color:#6b7280;font-size:13.5px;font-style:italic;margin:10px 0 18px}
 .fcard-list{list-style:none;margin:0;padding:0;text-align:left;display:flex;flex-direction:column;gap:12px}
 .fcard-list li{display:flex;align-items:flex-start;gap:11px;font-size:14px;color:#374151;line-height:1.5}
-.fcard-list .ck{flex-shrink:0;width:8px;height:8px;border-radius:50%;background:linear-gradient(135deg,var(--gold-2),var(--gold));margin-top:7px;box-shadow:0 0 0 3px rgba(230,168,23,.18)}
+.fcard-list .ck{flex-shrink:0;width:8px;height:8px;border-radius:50%;background:linear-gradient(135deg,var(--navy-2),var(--navy));margin-top:7px;box-shadow:0 0 0 3px rgba(10,30,94,.14)}
 .fcard-list .ck svg{display:none}
 @media(max-width:1024px){.fcards-grid{grid-template-columns:repeat(2,1fr)}}
 @media(max-width:600px){.fcards-grid{grid-template-columns:1fr;max-width:420px;margin:0 auto}}
