@@ -649,3 +649,29 @@ footer::before{content:"";position:absolute;top:0;left:0;right:0;height:5px;back
   .bk-head h3{font-size:20px}
   .bk-body{padding:20px 18px;max-height:calc(94vh - 100px)}
 }
+
+/* ===== CEO MESSAGE ===== */
+.sec-ceo{background:linear-gradient(180deg,#fff 0%,#f7f9ff 100%)}
+.ceo-grid{display:grid;grid-template-columns:1.12fr .88fr;gap:60px;align-items:center}
+.ceo-quote{position:relative;margin:24px 0 6px;padding-left:28px;border-left:3px solid var(--gold)}
+.ceo-quote p{color:#3c4560;line-height:1.85;margin-bottom:15px;font-size:16.5px}
+.ceo-quote p b{color:var(--navy)}
+.ceo-sign{margin-top:20px}
+.ceo-regards{color:#6b7390;font-style:italic;margin-bottom:8px}
+.ceo-name{font-family:var(--script);font-size:38px;color:var(--navy);line-height:1.2;margin-bottom:4px}
+.ceo-title{color:#6b7390;font-size:14px;letter-spacing:.4px;margin-bottom:12px}
+.ceo-contact{font-size:15.5px;font-weight:600}
+.ceo-contact a{color:var(--navy);text-decoration:none;border-bottom:2px solid var(--gold);padding-bottom:1px}
+.ceo-contact a:hover{color:var(--gold)}
+.ceo-contact .dot{margin:0 12px;color:var(--gold)}
+.ceo-photo figure{position:relative;margin:0}
+.ceo-photo figure::before{content:"";position:absolute;inset:0;transform:translate(18px,18px);border:2px solid var(--gold);border-radius:22px;z-index:0}
+.ceo-photo img{position:relative;z-index:1;display:block;width:100%;border-radius:20px;box-shadow:0 26px 60px rgba(10,30,94,.22)}
+.ceo-photo figcaption{position:absolute;z-index:2;left:26px;right:26px;bottom:-26px;background:#fff;border-radius:14px;box-shadow:0 14px 34px rgba(10,30,94,.16);padding:14px 18px;text-align:center;border-top:3px solid var(--gold)}
+.ceo-photo figcaption b{display:block;color:var(--navy);font-size:17px}
+.ceo-photo figcaption span{color:#6b7390;font-size:13.5px}
+@media(max-width:900px){
+  .ceo-grid{grid-template-columns:1fr;gap:52px}
+  .ceo-photo{order:-1;max-width:420px;margin:0 auto;width:100%}
+  .ceo-name{font-size:32px}
+}
