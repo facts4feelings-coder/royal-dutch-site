@@ -455,11 +455,12 @@ footer::before{content:"";position:absolute;top:0;left:0;right:0;height:5px;back
 .c-emails a{color:#b97f0a;font-weight:700;text-decoration:none;word-break:break-all;font-size:14.5px}
 .c-emails a:hover{text-decoration:underline}
 .c-emails em{color:#6b7280;font-size:13px;font-style:normal;margin-top:2px}
-.foot-emails{display:flex;flex-direction:column;gap:7px}
+.foot-emails{display:flex;flex-direction:column;gap:10px}
+.foot-emails .fem{display:block}
+.foot-emails b{display:block;color:var(--gold);font-weight:700;font-size:11px;letter-spacing:1.2px;text-transform:uppercase;margin-bottom:3px}
 .foot-emails a{font-size:13.5px;color:#dfe5f7;text-decoration:none;word-break:break-all}
 .foot-emails a::before{display:none}
 .foot-emails a:hover{color:var(--gold-2)}
-.foot-emails b{color:var(--gold);font-weight:700;margin-right:7px;font-size:12px;letter-spacing:.5px}
 .foot-bottom{border-top:1px solid rgba(255,255,255,.1);padding:22px 0;display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap;font-size:13.5px}
 .foot-bottom b{color:var(--gold-2)}
 

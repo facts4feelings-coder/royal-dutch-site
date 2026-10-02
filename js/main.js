@@ -222,10 +222,17 @@
   function sendToWhatsApp(form){
     var name = (form.querySelector("[name=name]")||{}).value || "";
     var phone = (form.querySelector("[name=phone]")||{}).value || "";
-    var service = (form.querySelector("[name=service]")||{}).value || "";
+    var svcEl = form.querySelector("[name=service]");
+    var service = "";
+    if(svcEl){
+      var opt = svcEl.options ? svcEl.options[svcEl.selectedIndex] : null;
+      service = (opt && opt.text) || svcEl.value || "";
+    }
+    var dest = (form.querySelector("[name=destination]")||{}).value || "";
     var msg = (form.querySelector("[name=message]")||{}).value || "";
     var text = "Assalam-o-Alaikum! I am " + name + " (" + phone + ").%0A" +
                "Service: " + service + "%0A" +
+               (dest ? "Destination: " + dest + "%0A" : "") +
                "Message: " + msg;
     window.open("https://wa.me/" + WA_NUMBER + "?text=" + encodeURIComponent(decodeURIComponent(text)), "_blank");
   }
