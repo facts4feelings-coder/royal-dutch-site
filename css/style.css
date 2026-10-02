@@ -84,18 +84,6 @@ section{position:relative}
 #preloader p{color:#fff;font-size:13px;letter-spacing:4px;text-transform:uppercase}
 
 /* ---------- Topbar ---------- */
-.topbar{background:var(--navy-dark);color:#dfe5f7;font-size:13px;position:relative;z-index:60}
-.topbar-inner{display:flex;justify-content:space-between;align-items:center;padding:9px 0;gap:16px;flex-wrap:wrap}
-.topbar a{display:inline-flex;align-items:center;gap:8px;transition:.25s}
-.topbar a:hover{color:var(--gold-2)}
-.topbar svg{width:15px;height:15px;fill:var(--gold)}
-.topbar .addr{display:inline-flex;align-items:center;gap:8px}
-.topbar-left,.topbar-right{display:flex;align-items:center;gap:22px;flex-wrap:wrap}
-.topbar .socials{display:flex;gap:10px}
-.topbar .socials a{width:28px;height:28px;border-radius:50%;background:rgba(255,255,255,.1);display:grid;place-items:center}
-.topbar .socials a:hover{background:var(--gold)}
-.topbar .socials a:hover svg{fill:var(--navy-dark)}
-.topbar .socials svg{width:14px;height:14px}
 
 /* ---------- Navbar ---------- */
 .site-header{position:sticky;top:0;z-index:1000}
@@ -511,7 +499,6 @@ footer::before{content:"";position:absolute;top:0;left:0;right:0;height:5px;back
   .hero-count{display:none}
   .testi-card{padding:38px 26px}
   .form-card,.cinfo-card,.c-form{padding:32px 24px}
-  .topbar-right .addr{display:none}
   .plane-fly{width:96px}
   .plane-fly.small{width:60px}
   .wa-float{width:52px;height:52px;bottom:16px;right:16px}
